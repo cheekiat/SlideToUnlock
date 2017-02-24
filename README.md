@@ -83,6 +83,6 @@ repositories {
 }
 
 dependencies {
- compile 'com.cheekiat:slideview:1.1'
+ compile 'com.cheekiat:slideview:1.2'
 }
 ```
