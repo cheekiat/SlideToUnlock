@@ -1,7 +1,8 @@
-# SlideToUnlock
+# Slide To Unlock
 This library can fast and easy develop slide to unlock function.
 
-# Samples Code?
+Java Code
+----------------
        SlideView mSlideView = (SlideView) findViewById(R.id.slide_view);
         mSlideView.setOnFinishListener(new SlideView.OnFinishListener() {
             @Override
@@ -17,7 +18,8 @@ This library can fast and easy develop slide to unlock function.
             }
         });
         
-# Samples Xml
+Xml Code
+----------------
 ```
    <custom.ui.SlideView
         android:id="@+id/slide_view"
@@ -35,7 +37,8 @@ This library can fast and easy develop slide to unlock function.
         app:slideTextSize="10dp" />
 ```
         
-# How to use?
+How to use?
+----------------
 ```
 //Java
 //Reset the slide button
@@ -61,9 +64,13 @@ app:slideSrcMarginTop="10dp"
 app:slideText="Slide to unlock"
 app:slideTextColor="#ffffff"
 app:slideTextSize="10dp" 
+
+//When slide more than 50% will success
+app:slideSuccessPercent="50"
 ```
 
-# Download
+Download
+----------------
 ```
 repositories {
   mavenCentral() // jcenter() works as well because it pulls from Maven Central
