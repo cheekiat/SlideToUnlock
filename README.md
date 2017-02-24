@@ -1,6 +1,6 @@
 # Slide To Unlock
 This library can fast and easy develop slide to unlock function.
--Slide icon can support image or shape file
+* Slide icon can support image or shape file
 
 Java Code
 ----------------
