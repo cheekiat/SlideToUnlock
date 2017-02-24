@@ -39,15 +39,19 @@ Xml Code
         
 How to use?
 ----------------
+
+Java
 ```
-//Java
 //Reset the slide button
 reset();
 
 //Add slide success listener
 setOnFinishListener();
+```
 
-//Xml
+Xml
+----------------
+```
 //Set slide background resource
 app:slideBackground="@drawable/orangesquarebutton"
 
