@@ -33,7 +33,7 @@ This library can fast and easy develop slide to unlock function.
         app:slideText="Slide to unlock"
         app:slideTextColor="#ffffff"
         app:slideTextSize="10dp" />
-        ```
+```
         
 # How to use?
 ```
