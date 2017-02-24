@@ -86,3 +86,8 @@ dependencies {
  compile 'com.cheekiat:slideview:1.2'
 }
 ```
+Features
+===================
+* -
+* -
+
