@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <declare-styleable name="SlideData">
+            <attr name="slideBackground" format="reference|color" />
+            <attr name="slideSrc" format="reference" />
+            <attr name="slideSrcMargin" format="dimension" />
+            <attr name="slideSrcMarginLeft" format="dimension" />
+            <attr name="slideSrcMarginRight" format="dimension" />
+            <attr name="slideSrcMarginTop" format="dimension" />
+            <attr name="slideSrcMarginBottom" format="dimension" />
+            <attr name="slideText" format="string" />
+            <attr name="slideTextColor" format="color" />
+            <attr name="slideTextSize" format="dimension" />
+            <attr name="duration" format="integer" />
+        </declare-styleable>
+</resources>
