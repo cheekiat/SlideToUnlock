@@ -19,11 +19,12 @@
         app:duration="200"
         app:slideBackground="@drawable/shape_background"
         app:slideSrc="@drawable/shape_slide_icon"
-        app:slideText="Slide to unlock"
         app:slideSrcMarginBottom="2dp"
         app:slideSrcMarginLeft="2dp"
         app:slideSrcMarginRight="2dp"
         app:slideSrcMarginTop="2dp"
+        app:slideSuccessPercent="50"
+        app:slideText="Slide to unlock"
         app:slideTextColor="#ffffff"
         app:slideTextSize="10dp" />
 
@@ -31,8 +32,8 @@
         android:id="@+id/slide_view2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:duration="200"
         android:layout_marginTop="20dp"
+        app:duration="200"
         app:slideBackground="@drawable/orangesquarebutton"
         app:slideSrc="@drawable/slide_image"
         app:slideSrcMarginBottom="8dp"

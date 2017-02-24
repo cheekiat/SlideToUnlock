@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -26,7 +27,8 @@ public class SlideView extends RelativeLayout {
     private Integer duration, slideTextColor;
     private boolean isCanTouch = true;
     private int slideTextSize, slideSrcMargin, slideSrcMarginLeft, slideSrcMarginTop, slideSrcMarginRight, slideSrcMarginBottom;
-
+    private int slideSuccessPercent;
+    private int getPercent;
     OnFinishListener onFinishListener;
 
     public interface OnFinishListener {
@@ -59,7 +61,7 @@ public class SlideView extends RelativeLayout {
             slideSrcMarginTop = a.getDimensionPixelSize(R.styleable.SlideData_slideSrcMarginTop, 0);
             slideSrcMarginBottom = a.getDimensionPixelSize(R.styleable.SlideData_slideSrcMarginBottom, 0);
             slideSrcMarginRight = a.getDimensionPixelSize(R.styleable.SlideData_slideSrcMarginRight, 0);
-
+            slideSuccessPercent = a.getInteger(R.styleable.SlideData_slideSuccessPercent, 0);
             mSlideBackground = a.getDrawable(R.styleable.SlideData_slideBackground);
             duration = a.getInteger(R.styleable.SlideData_duration, 200);
 
@@ -134,8 +136,8 @@ public class SlideView extends RelativeLayout {
                             break;
                         case MotionEvent.ACTION_UP:
                             isCanTouch = false;
-                            float maxSum2 = (getWidth()) - mSlideIcon.getWidth();
-                            if (mSlideIcon.getX() < (maxSum2 / 2)) {
+
+                            if (mSlideIcon.getX() < getPercent) {
                                 mSlideIcon.animate().setDuration(duration).x((float) mSlideIcon.getTag()).setListener(new Animator.AnimatorListener() {
                                     @Override
                                     public void onAnimationStart(Animator animator) {
@@ -199,6 +201,19 @@ public class SlideView extends RelativeLayout {
     public SlideView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+
+        if (getPercent == 0) {
+            if (slideSuccessPercent == 0) {
+                getPercent = ((getWidth()) - mSlideIcon.getWidth()) / 2;
+            } else {
+                getPercent = (((getWidth()*slideSuccessPercent)/100))-(mSlideIcon.getWidth()/2);
+            }
+        }
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
     public void reset() {

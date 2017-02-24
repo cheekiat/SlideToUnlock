@@ -12,5 +12,6 @@
             <attr name="slideTextColor" format="color" />
             <attr name="slideTextSize" format="dimension" />
             <attr name="duration" format="integer" />
+            <attr name="slideSuccessPercent" format="integer" />
         </declare-styleable>
 </resources>
