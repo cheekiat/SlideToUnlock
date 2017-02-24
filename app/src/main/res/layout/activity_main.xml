@@ -12,21 +12,20 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="cheekiat.slidetounlock.MainActivity">
 
-    <custom.ui.SlideView
+    <cheekiat.slideview.SlideView
         android:id="@+id/slide_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:duration="200"
         app:slideBackground="@drawable/orangesquarebutton"
         app:slideSrc="@drawable/slide_image"
-        app:slideSrcMarginBottom="10dp"
+        app:slideSrcMarginBottom="8dp"
         app:slideSrcMarginLeft="10dp"
         app:slideSrcMarginRight="10dp"
         app:slideSrcMarginTop="10dp"
         app:slideText="Slide to unlock"
         app:slideTextColor="#ffffff"
         app:slideTextSize="10dp" />
-
 
     <Button
         android:id="@+id/reset"

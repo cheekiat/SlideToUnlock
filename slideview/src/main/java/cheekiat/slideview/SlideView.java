@@ -1,20 +1,16 @@
-package custom.ui;
+package cheekiat.slideview;
 
 import android.animation.Animator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import cheekiat.slidetounlock.R;
 
 /**
  * Created by Chee Kiat on 23/02/2017.
@@ -95,15 +91,15 @@ public class SlideView extends RelativeLayout {
             mSlideTextView.setTextSize(slideTextSize);
             addView(mSlideTextView);
 
-            RelativeLayout.LayoutParams layoutParams =
-                    (RelativeLayout.LayoutParams) mSlideTextView.getLayoutParams();
+            LayoutParams layoutParams =
+                    (LayoutParams) mSlideTextView.getLayoutParams();
             layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
             mSlideTextView.setLayoutParams(layoutParams);
         }
 
         addView(mSlideIcon);
-        RelativeLayout.LayoutParams layoutParams =
-                (RelativeLayout.LayoutParams) mSlideIcon.getLayoutParams();
+        LayoutParams layoutParams =
+                (LayoutParams) mSlideIcon.getLayoutParams();
         layoutParams.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
         mSlideIcon.setLayoutParams(layoutParams);
 
