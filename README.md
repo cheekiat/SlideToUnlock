@@ -1,6 +1,6 @@
 # Slide To Unlock
 This library can fast and easy develop slide to unlock function.
-* Slide icon and background can support image or shape file
+* Slide icon and background can support image, shape and color code
 
 Java Code
 ----------------
@@ -32,6 +32,7 @@ Xml Code
         app:slideSrcMarginBottom="10dp"
         app:slideSrcMarginLeft="10dp"
         app:slideSrcMarginRight="10dp"
+        app:slideSuccessPercent="50"
         app:slideSrcMarginTop="10dp"
         app:slideText="Slide to unlock"
         app:slideTextColor="#ffffff"
