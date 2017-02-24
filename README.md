@@ -17,15 +17,17 @@ This library can fast and easy develop slide to unlock function.
             }
         });
         
+# Use
+//Reset the slide button
+reset();
+        
 # Download
+```
 repositories {
-
   mavenCentral() // jcenter() works as well because it pulls from Maven Central
-
 }
 
 dependencies {
-
-  compile 'com.cheekiat:slideview:1.1'
-
-  }
+ compile 'com.cheekiat:slideview:1.1'
+}
+```
