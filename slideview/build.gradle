@@ -51,5 +51,5 @@ publish {
     artifactId = 'slideview'     //compile引用时的第2部分项目名
     publishVersion = '1.0'    //compile引用时的第3部分版本号
     desc = 'This is a rxbus same of eventbus extend library '
-    website = 'https://github.com/wzgiceman/Rxbus'
+    website = 'https://github.com/cheekiat/SlideToUnlock'
 }
