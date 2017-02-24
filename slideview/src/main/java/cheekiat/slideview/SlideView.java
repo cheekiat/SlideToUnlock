@@ -202,7 +202,10 @@ public class SlideView extends RelativeLayout {
     }
 
     public void reset() {
-        mSlideIcon.animate().setDuration(0).x((float) mSlideIcon.getTag()).start();
-        isCanTouch = true;
+        if (mSlideIcon != null && mSlideIcon.getTag() != null) {
+            mSlideIcon.animate().setListener(null);
+            mSlideIcon.animate().setDuration(0).x((float) mSlideIcon.getTag()).start();
+            isCanTouch = true;
+        }
     }
 }
