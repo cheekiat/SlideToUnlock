@@ -2,6 +2,10 @@
 This library can fast and easy develop slide to unlock function.
 * Slide icon and background can support image, shape and color code
 
+ScreenShot
+----------------
+![ScreenShot](https://github.com/cheekiat/SlideToUnlock/blob/master/appscreenshort.gif)
+
 Java Code
 ----------------
        SlideView mSlideView = (SlideView) findViewById(R.id.slide_view);
