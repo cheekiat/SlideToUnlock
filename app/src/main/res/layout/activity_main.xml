@@ -26,7 +26,7 @@
         app:slideSuccessPercent="50"
         app:slideText="Slide to unlock"
         app:slideTextColor="#ffffff"
-        app:slideTextSize="10dp" />
+        app:slideTextSize="7dp" />
 
     <cheekiat.slideview.SlideView
         android:id="@+id/slide_view2"
@@ -42,7 +42,7 @@
         app:slideSrcMarginTop="10dp"
         app:slideText="Slide to unlock"
         app:slideTextColor="#ffffff"
-        app:slideTextSize="10dp" />
+        app:slideTextSize="5dp" />
 
 
     <Button

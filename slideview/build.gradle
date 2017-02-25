@@ -49,7 +49,7 @@ publish {
     userOrg = 'kiathee'
     groupId = 'com.cheekiat'
     artifactId = 'slideview'
-    publishVersion = '1.1'
+    publishVersion = '1.2'
     desc = 'This is a android slide to unload library '
     website = 'https://github.com/cheekiat/SlideToUnlock'
 }

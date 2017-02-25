@@ -105,9 +105,20 @@ public class SlideView extends RelativeLayout {
         layoutParams.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
         mSlideIcon.setLayoutParams(layoutParams);
 
+        Log.d(this.getClass().getName(),"getWidth()) : "+getWidth());
+        Log.d(this.getClass().getName(),"mSlideIcon()) : "+mSlideIcon.getWidth());
+
         setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
+
+                if (getPercent == 0) {
+                    if (slideSuccessPercent == 0) {
+                        getPercent = ((getWidth()) - mSlideIcon.getWidth()) / 2;
+                    } else {
+                        getPercent = (((getWidth()*slideSuccessPercent)/100))-(mSlideIcon.getWidth()/2);
+                    }
+                }
 
                 if (isCanTouch) {
                     float maxRight = (getWidth()) - mSlideIcon.getWidth();
@@ -206,14 +217,8 @@ public class SlideView extends RelativeLayout {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 
-        if (getPercent == 0) {
-            if (slideSuccessPercent == 0) {
-                getPercent = ((getWidth()) - mSlideIcon.getWidth()) / 2;
-            } else {
-                getPercent = (((getWidth()*slideSuccessPercent)/100))-(mSlideIcon.getWidth()/2);
-            }
-        }
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
     }
 
     public void reset() {
