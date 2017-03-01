@@ -20,7 +20,7 @@ Java Code
 Xml Code
 ----------------
 ```
-   <custom.ui.SlideView
+   <cheekiat.slideview.SlideView
         android:id="@+id/slide_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
