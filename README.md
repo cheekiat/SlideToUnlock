@@ -24,17 +24,10 @@ Xml Code
         android:id="@+id/slide_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:duration="200"
         app:slideBackground="@drawable/orangesquarebutton"
         app:slideSrc="@drawable/slide_image"
-        app:slideSrcMarginBottom="10dp"
-        app:slideSrcMarginLeft="10dp"
-        app:slideSrcMarginRight="10dp"
-        app:slideSuccessPercent="50"
-        app:slideSrcMarginTop="10dp"
         app:slideText="Slide to unlock"
-        app:slideTextColor="#ffffff"
-        app:slideTextSize="10dp" />
+        />
 ```
         
 How to use?
@@ -50,14 +43,15 @@ How to use?
 | ------------- | ------------- |
 | app:slideBackground | Set slide background resource. |
 | app:slideSrc | Set slide icon resource. |
-| app:slideSrcMarginTop | Set slide icon margin top. |
-| app:slideSrcMarginRight | Set slide icon resource right. |
-| app:slideSrcMarginBottom | Set slide icon resource bottom. |
-| app:slideSrcMarginLeft | Set slide icon resource left. |
 | app:slideText | Set slide layout text. |
 | app:slideTextColor | Set slide layout text color. |
 | app:slideTextSize | Set slide layout text size. |
 | app:slideSuccessPercent | When slide more than your set value will animation to success. |
+| app:duration | Set slide icon moveing duration. |
+| app:slideSrcMarginTop | Set slide icon margin top. |
+| app:slideSrcMarginRight | Set slide icon resource right. |
+| app:slideSrcMarginBottom | Set slide icon resource bottom. |
+| app:slideSrcMarginLeft | Set slide icon resource left. |
 
 Download
 ----------------
