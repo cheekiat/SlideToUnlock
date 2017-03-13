@@ -39,39 +39,25 @@ Xml Code
         
 How to use?
 ----------------
+### Java
+| Public methods | Description |
+| ------------- | ------------- |
+| reset() | Reset the slide button. |
+| setOnFinishListener() | Add slide success listener. |
 
-Java
-```
-//Reset the slide button
-reset();
-
-//Add slide success listener
-setOnFinishListener();
-```
-
-Xml
-----------------
-```
-//Set slide background resource
-app:slideBackground="@drawable/orangesquarebutton"
-
-//Set slide icon resource
-app:slideSrc="@drawable/slide_image"
-
-//Set slide icon margin
-app:slideSrcMarginBottom="10dp"
-app:slideSrcMarginLeft="10dp"
-app:slideSrcMarginRight="10dp"
-app:slideSrcMarginTop="10dp"
-
-//Set slide text value
-app:slideText="Slide to unlock"
-app:slideTextColor="#ffffff"
-app:slideTextSize="10dp" 
-
-//When slide more than 50% will success
-app:slideSuccessPercent="50"
-```
+### Xml
+| XML attributes | Description |
+| ------------- | ------------- |
+| app:slideBackground | Set slide background resource. |
+| app:slideSrc | Set slide icon resource. |
+| app:slideSrcMarginTop | Set slide icon margin top. |
+| app:slideSrcMarginRight | Set slide icon resource right. |
+| app:slideSrcMarginBottom | Set slide icon resource bottom. |
+| app:slideSrcMarginLeft | Set slide icon resource left. |
+| app:slideText | Set slide layout text. |
+| app:slideTextColor | Set slide layout text color. |
+| app:slideTextSize | Set slide layout text size. |
+| app:slideSuccessPercent | When slide more than your set value will animation to success. |
 
 Download
 ----------------
@@ -84,6 +70,7 @@ dependencies {
  compile 'com.cheekiat:slideview:1.3'
 }
 ```
+
 Features
 ===================
 * -
