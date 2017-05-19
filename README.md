@@ -1,4 +1,7 @@
 # Slide To Unlock
+[![License](https://img.shields.io/badge/license-Apache%202-green.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+[![Download](https://api.bintray.com/packages/tangsiyuan/maven/myokhttp/images/download.svg) ](https://dl.bintray.com/kiathee/maven/slideview/_latestVersion)
+
 This library can fast and easy develop slide to unlock function.
 * Slide icon and background can support image, shape and color code
 
