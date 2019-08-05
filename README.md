@@ -12,10 +12,17 @@ ScreenShot
 Java Code
 ----------------
        SlideView mSlideView = (SlideView) findViewById(R.id.slide_view);
-        mSlideView.setOnFinishListener(new SlideView.OnFinishListener() {
+
+        mSlideView.setOnChangeListener(new OnChangeListener(){
+
             @Override
-            public void onFinish() {
-                //someting to do
+            public void onProgressChanged(int progress) {
+                 //Show progress 0 ~ 100
+            }
+
+            @Override
+            public void onComplete() {
+                Toast.makeText(MainActivity.this,"Complete!",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -64,12 +71,12 @@ repositories {
 }
 
 dependencies {
- compile 'com.cheekiat:slideview:1.3'
+ implementation 'com.cheekiat:slideview:1.4'
 }
 ```
 
 Features
 ===================
-* -
-* -
+* If you've experienced any Bug. Please let me know, thanks.
+
 
