@@ -1,14 +1,26 @@
 package cheekiat.slideview;
 
 import android.animation.Animator;
+import android.animation.ValueAnimator;
+import android.app.Activity;
+import android.arch.lifecycle.LifecycleOwner;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.Nullable;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.view.ViewPropertyAnimatorListener;
+import android.support.v4.view.ViewPropertyAnimatorUpdateListener;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -30,14 +42,17 @@ public class SlideView extends RelativeLayout {
     private int slideSuccessPercent;
     private int getPercent;
     OnFinishListener onFinishListener;
+    OnChangeListener onChangeListener;
+    MutableLiveData<Integer> progress = new MutableLiveData<>();
 
-    public interface OnFinishListener {
-
-        void onFinish();
-    }
+    int progressMin,progressMax;
 
     public void setOnFinishListener(OnFinishListener listener) {
         this.onFinishListener = listener;
+    }
+
+    public void setOnChangeListener(OnChangeListener listener) {
+        this.onChangeListener = listener;
     }
 
     public SlideView(Context context) {
@@ -121,7 +136,7 @@ public class SlideView extends RelativeLayout {
                 }
 
                 if (isCanTouch) {
-                    float maxRight = (getWidth()) - mSlideIcon.getWidth();
+                    progressMax = (getWidth()) - mSlideIcon.getWidth();
 
                     switch (event.getAction()) {
 
@@ -130,6 +145,8 @@ public class SlideView extends RelativeLayout {
                             storeX = event.getRawX();
                             if (mSlideIcon.getTag() == null) {
                                 mSlideIcon.setTag(mSlideIcon.getX());
+
+                                progressMin = (int) ((float) mSlideIcon.getTag());
                             }
                             break;
 
@@ -139,59 +156,68 @@ public class SlideView extends RelativeLayout {
 
                             if (event.getRawX() < storeX) {
                                 mSlideIcon.animate().setDuration(0).x((float) mSlideIcon.getTag()).start();
-                            } else if (sum > maxRight) {
-                                mSlideIcon.animate().setDuration(0).x(maxRight).start();
+                            } else if (sum > progressMax) {
+                                mSlideIcon.animate().setDuration(0).x(progressMax).start();
                             } else {
                                 mSlideIcon.animate().setDuration(0).x(sum).start();
                             }
+
+                            progress.setValue((int) mSlideIcon.getX());
                             break;
                         case MotionEvent.ACTION_UP:
                             isCanTouch = false;
 
                             if (mSlideIcon.getX() < getPercent) {
-                                mSlideIcon.animate().setDuration(duration).x((float) mSlideIcon.getTag()).setListener(new Animator.AnimatorListener() {
+
+                                ViewCompat.animate(mSlideIcon).setDuration(duration).x((float) mSlideIcon.getTag()).setListener(new ViewPropertyAnimatorListener() {
                                     @Override
-                                    public void onAnimationStart(Animator animator) {
+                                    public void onAnimationStart(View view) {
 
                                     }
 
                                     @Override
-                                    public void onAnimationEnd(Animator animator) {
+                                    public void onAnimationEnd(View view) {
                                         isCanTouch = true;
                                     }
 
                                     @Override
-                                    public void onAnimationCancel(Animator animator) {
+                                    public void onAnimationCancel(View view) {
 
                                     }
-
+                                }).setUpdateListener(new ViewPropertyAnimatorUpdateListener() {
                                     @Override
-                                    public void onAnimationRepeat(Animator animator) {
-
+                                    public void onAnimationUpdate(View view) {
+                                        progress.setValue((int) view.getX());
                                     }
                                 }).start();
+
                             } else {
 
-                                mSlideIcon.animate().setDuration(duration).x(maxRight).setListener(new Animator.AnimatorListener() {
+                                ViewCompat.animate(mSlideIcon).setDuration(duration).x(progressMax).setListener(new ViewPropertyAnimatorListener() {
                                     @Override
-                                    public void onAnimationStart(Animator animation) {
+                                    public void onAnimationStart(View view) {
+
                                     }
 
                                     @Override
-                                    public void onAnimationEnd(Animator animation) {
+                                    public void onAnimationEnd(View view) {
                                         if (onFinishListener != null) {
                                             onFinishListener.onFinish();
+                                        }
+
+                                        if(onChangeListener != null){
+                                            onChangeListener.onComplete();
                                         }
                                     }
 
                                     @Override
-                                    public void onAnimationCancel(Animator animation) {
+                                    public void onAnimationCancel(View view) {
 
                                     }
-
+                                }).setUpdateListener(new ViewPropertyAnimatorUpdateListener() {
                                     @Override
-                                    public void onAnimationRepeat(Animator animation) {
-
+                                    public void onAnimationUpdate(View view) {
+                                        progress.setValue((int) view.getX());
                                     }
                                 }).start();
                             }
@@ -207,6 +233,20 @@ public class SlideView extends RelativeLayout {
                 }
             }
         });
+
+        progress.observe((LifecycleOwner) getContext(), new Observer<Integer>() {
+            @Override
+            public void onChanged(@Nullable Integer integer) {
+
+                if(onChangeListener != null){
+
+                    int progress = integer == 0 ? 0 :((integer*100)/progressMax);
+
+                    onChangeListener.onProgressChanged(progress);
+                }
+            }
+        });
+
     }
 
     public SlideView(Context context, AttributeSet attrs, int defStyleAttr) {

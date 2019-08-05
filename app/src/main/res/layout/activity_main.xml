@@ -12,6 +12,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="cheekiat.slidetounlock.MainActivity">
 
+    <TextView
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        tools:text="100"
+        android:text="0"
+        android:layout_height="wrap_content" />
+
     <cheekiat.slideview.SlideView
         android:id="@+id/slide_view"
         android:layout_width="match_parent"
