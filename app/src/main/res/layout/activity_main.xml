@@ -52,6 +52,15 @@
         app:slideTextSize="5dp" />
 
 
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Autocomplete:"
+        android:checked="false"
+        android:layout_marginTop="20dp"
+        android:textOff=""
+        android:textOn=""/>
 
     <cheekiat.slideview.SlideView
         android:id="@+id/slide_view_autocomplete"
@@ -59,8 +68,8 @@
         android:layout_height="wrap_content"
         app:duration="200"
         app:slideAutocomplete="false"
-        android:layout_marginTop="20dp"
         app:slideBackground="@drawable/shape_background"
+        android:layout_marginTop="10dp"
         app:slideSrc="@drawable/shape_slide_icon"
         app:slideSrcMarginBottom="2dp"
         app:slideSrcMarginLeft="2dp"

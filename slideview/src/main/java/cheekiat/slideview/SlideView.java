@@ -178,10 +178,13 @@ public class SlideView extends RelativeLayout {
                                     mSlideIcon.animate().setDuration(0).x(sum).start();
                                 }
                             }
-
-                            progress.setValue((int) mSlideIcon.getX());
+                            updateProgress((int) mSlideIcon.getX());
                             break;
                         case MotionEvent.ACTION_UP:
+
+                            if(onChangeListener != null){
+                                onChangeListener.onStopChanged();
+                            }
 
                             if (!slideAutocomplete) {
                                 isCanTouch = true;
@@ -210,7 +213,7 @@ public class SlideView extends RelativeLayout {
                                 }).setUpdateListener(new ViewPropertyAnimatorUpdateListener() {
                                     @Override
                                     public void onAnimationUpdate(View view) {
-                                        progress.setValue((int) view.getX());
+                                        updateProgress((int) view.getX());
                                     }
                                 }).start();
 
@@ -240,7 +243,7 @@ public class SlideView extends RelativeLayout {
                                 }).setUpdateListener(new ViewPropertyAnimatorUpdateListener() {
                                     @Override
                                     public void onAnimationUpdate(View view) {
-                                        progress.setValue((int) view.getX());
+                                        updateProgress((int) view.getX());
                                     }
                                 }).start();
                             }
@@ -257,19 +260,28 @@ public class SlideView extends RelativeLayout {
             }
         });
 
-        progress.observe((LifecycleOwner) getContext(), new Observer<Integer>() {
-            @Override
-            public void onChanged(@Nullable Integer integer) {
+//        progress.observe((LifecycleOwner) getContext(), new Observer<Integer>() {
+//            @Override
+//            public void onChanged(@Nullable Integer integer) {
+//
+//                if (onChangeListener != null) {
+//
+//                    int progress = integer == 0 ? 0 : ((integer * 100) / progressMax);
+//
+//                    onChangeListener.onProgressChanged(progress);
+//                }
+//            }
+//        });
 
-                if (onChangeListener != null) {
+    }
 
-                    int progress = integer == 0 ? 0 : ((integer * 100) / progressMax);
+    void updateProgress(int value){
+        if (onChangeListener != null) {
 
-                    onChangeListener.onProgressChanged(progress);
-                }
-            }
-        });
+            int progress = value == 0 ? 0 : ((value * 100) / progressMax);
 
+            onChangeListener.onProgressChanged(progress);
+        }
     }
 
     public SlideView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -282,6 +294,15 @@ public class SlideView extends RelativeLayout {
 
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
+    }
+
+    public void setAutocomplete(boolean isAutocomplete){
+
+        if(isAutocomplete){
+            reset();
+        }
+
+        slideAutocomplete = isAutocomplete;
     }
 
     public void reset() {
