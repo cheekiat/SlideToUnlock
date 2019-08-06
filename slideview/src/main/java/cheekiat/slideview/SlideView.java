@@ -1,26 +1,17 @@
 package cheekiat.slideview;
 
-import android.animation.Animator;
-import android.animation.ValueAnimator;
-import android.app.Activity;
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.Nullable;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v4.view.ViewPropertyAnimatorUpdateListener;
-import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -259,20 +250,6 @@ public class SlideView extends RelativeLayout {
                 }
             }
         });
-
-//        progress.observe((LifecycleOwner) getContext(), new Observer<Integer>() {
-//            @Override
-//            public void onChanged(@Nullable Integer integer) {
-//
-//                if (onChangeListener != null) {
-//
-//                    int progress = integer == 0 ? 0 : ((integer * 100) / progressMax);
-//
-//                    onChangeListener.onProgressChanged(progress);
-//                }
-//            }
-//        });
-
     }
 
     void updateProgress(int value){
