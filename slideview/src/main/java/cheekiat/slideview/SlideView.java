@@ -41,11 +41,13 @@ public class SlideView extends RelativeLayout {
     private int slideTextSize, slideSrcMargin, slideSrcMarginLeft, slideSrcMarginTop, slideSrcMarginRight, slideSrcMarginBottom;
     private int slideSuccessPercent;
     private int getPercent;
+    private boolean slideAutocomplete;
+
     OnFinishListener onFinishListener;
     OnChangeListener onChangeListener;
     MutableLiveData<Integer> progress = new MutableLiveData<>();
 
-    int progressMin,progressMax;
+    int progressMin, progressMax;
 
     public void setOnFinishListener(OnFinishListener listener) {
         this.onFinishListener = listener;
@@ -79,6 +81,7 @@ public class SlideView extends RelativeLayout {
             slideSuccessPercent = a.getInteger(R.styleable.SlideData_slideSuccessPercent, 0);
             mSlideBackground = a.getDrawable(R.styleable.SlideData_slideBackground);
             duration = a.getInteger(R.styleable.SlideData_duration, 200);
+            slideAutocomplete = a.getBoolean(R.styleable.SlideData_slideAutocomplete, true);
 
 
             slideText = a.getString(R.styleable.SlideData_slideText);
@@ -120,8 +123,8 @@ public class SlideView extends RelativeLayout {
         layoutParams.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
         mSlideIcon.setLayoutParams(layoutParams);
 
-        Log.d(this.getClass().getName(),"getWidth()) : "+getWidth());
-        Log.d(this.getClass().getName(),"mSlideIcon()) : "+mSlideIcon.getWidth());
+        Log.d(this.getClass().getName(), "getWidth()) : " + getWidth());
+        Log.d(this.getClass().getName(), "mSlideIcon()) : " + mSlideIcon.getWidth());
 
         setOnTouchListener(new OnTouchListener() {
             @Override
@@ -131,7 +134,7 @@ public class SlideView extends RelativeLayout {
                     if (slideSuccessPercent == 0) {
                         getPercent = ((getWidth()) - mSlideIcon.getWidth()) / 2;
                     } else {
-                        getPercent = (((getWidth()*slideSuccessPercent)/100))-(mSlideIcon.getWidth()/2);
+                        getPercent = (((getWidth() * slideSuccessPercent) / 100)) - (mSlideIcon.getWidth() / 2);
                     }
                 }
 
@@ -141,8 +144,11 @@ public class SlideView extends RelativeLayout {
                     switch (event.getAction()) {
 
                         case MotionEvent.ACTION_DOWN:
-
-                            storeX = event.getRawX();
+                            if (!slideAutocomplete) {
+                                storeX = mSlideIcon.getX()-event.getRawX();
+                            } else {
+                                storeX = event.getRawX();
+                            }
                             if (mSlideIcon.getTag() == null) {
                                 mSlideIcon.setTag(mSlideIcon.getX());
 
@@ -152,20 +158,37 @@ public class SlideView extends RelativeLayout {
 
                         case MotionEvent.ACTION_MOVE:
 
-                            float sum = Math.abs(storeX - event.getRawX());
-
-                            if (event.getRawX() < storeX) {
-                                mSlideIcon.animate().setDuration(0).x((float) mSlideIcon.getTag()).start();
-                            } else if (sum > progressMax) {
-                                mSlideIcon.animate().setDuration(0).x(progressMax).start();
+                            if (!slideAutocomplete) {
+                                float sum = Math.abs(storeX + event.getRawX());
+                                if (progressMin > (storeX + event.getRawX())) {
+                                    mSlideIcon.animate().setDuration(0).x((float) mSlideIcon.getTag()).start();
+                                } else if (sum > progressMax) {
+                                    mSlideIcon.animate().setDuration(0).x(progressMax).start();
+                                } else {
+                                    mSlideIcon.animate().setDuration(0).x(sum).start();
+                                }
                             } else {
-                                mSlideIcon.animate().setDuration(0).x(sum).start();
+
+                                float sum = Math.abs(storeX - event.getRawX());
+                                if (event.getRawX() < storeX) {
+                                    mSlideIcon.animate().setDuration(0).x((float) mSlideIcon.getTag()).start();
+                                } else if (sum > progressMax) {
+                                    mSlideIcon.animate().setDuration(0).x(progressMax).start();
+                                } else {
+                                    mSlideIcon.animate().setDuration(0).x(sum).start();
+                                }
                             }
 
                             progress.setValue((int) mSlideIcon.getX());
                             break;
                         case MotionEvent.ACTION_UP:
-                            isCanTouch = false;
+
+                            if (!slideAutocomplete) {
+                                isCanTouch = true;
+                                return false;
+                            } else {
+                                isCanTouch = false;
+                            }
 
                             if (mSlideIcon.getX() < getPercent) {
 
@@ -205,7 +228,7 @@ public class SlideView extends RelativeLayout {
                                             onFinishListener.onFinish();
                                         }
 
-                                        if(onChangeListener != null){
+                                        if (onChangeListener != null) {
                                             onChangeListener.onComplete();
                                         }
                                     }
@@ -238,9 +261,9 @@ public class SlideView extends RelativeLayout {
             @Override
             public void onChanged(@Nullable Integer integer) {
 
-                if(onChangeListener != null){
+                if (onChangeListener != null) {
 
-                    int progress = integer == 0 ? 0 :((integer*100)/progressMax);
+                    int progress = integer == 0 ? 0 : ((integer * 100) / progressMax);
 
                     onChangeListener.onProgressChanged(progress);
                 }

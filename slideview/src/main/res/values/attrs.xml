@@ -13,5 +13,6 @@
             <attr name="slideTextSize" format="dimension" />
             <attr name="duration" format="integer" />
             <attr name="slideSuccessPercent" format="integer" />
+            <attr name="slideAutocomplete" format="boolean" />
         </declare-styleable>
 </resources>

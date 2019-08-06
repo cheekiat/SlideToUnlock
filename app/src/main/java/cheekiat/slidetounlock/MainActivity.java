@@ -12,7 +12,7 @@ import cheekiat.slideview.SlideView;
 
 public class MainActivity extends AppCompatActivity {
 
-    SlideView mSlideView, mSlideViewImage;
+    SlideView mSlideView, mSlideViewImage,mSlideViewAutocompleteImage;
 
     TextView progressView;
     @Override
@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
         mSlideView = (SlideView) findViewById(R.id.slide_view);
         mSlideViewImage = (SlideView) findViewById(R.id.slide_view2);
+        mSlideViewAutocompleteImage = (SlideView) findViewById(R.id.slide_view_autocomplete);
         progressView = (TextView)findViewById(R.id.progress);
 
         mSlideView.setOnChangeListener(new OnChangeListener(){
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 mSlideView.reset();
                 mSlideViewImage.reset();
+                mSlideViewAutocompleteImage.reset();
             }
         });
 
