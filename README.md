@@ -71,7 +71,7 @@ repositories {
 }
 
 dependencies {
- implementation 'com.cheekiat:slideview:1.3'
+ implementation 'com.cheekiat:slideview:1.6'
 }
 ```
 
